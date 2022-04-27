@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EagleEats.Data
+namespace EagleEatsFinal.Data
 {
     public enum DeliveryStatus
     {

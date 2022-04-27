@@ -11,8 +11,9 @@ if (connectionString.Contains("%CONTENTROOTPATH%"))
 {
     connectionString = connectionString.Replace("%CONTENTROOTPATH%", builder.Environment.ContentRootPath);
 }
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

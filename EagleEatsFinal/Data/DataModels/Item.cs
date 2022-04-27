@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EagleEats.Data
+namespace EagleEatsFinal.Data
 {
     public class Item
     {

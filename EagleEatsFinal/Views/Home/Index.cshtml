@@ -5,4 +5,36 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <button onclick="locationTest()"></button>
 </div>
+
+
+
+<script>
+const getLocation = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+             position.coords.latitude;
+             position.coords.longitude;
+
+             // You can use this in the client 
+             // or send it to the server using AJAX.
+        });
+
+        
+    } else {
+        // Geolocation is not supported by this browser.
+        // This is when you will have to use the IP address.
+    }
+}
+
+const locationTest = () => {
+    if (navigator.geolocation) {
+        console.log("yes");
+    } else {
+        // Geolocation is not supported by this browser.
+        // This is when you will have to use the IP address.
+    }
+}
+</script>
