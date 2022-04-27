@@ -3546,7 +3546,7 @@ const AttachmentMap = {
 };
 const Default$3 = {
   animation: true,
-  template: '<div class="tooltip" role="tooltip">' + '<div class="tooltip-arrow"></div>' + '<div class="tooltip-inner"></div>' + '</div>',
+  template: '<div class=""></div>' + '</div>',
   trigger: 'hover focus',
   title: '',
   delay: 0,
@@ -4221,7 +4221,7 @@ const Default$2 = { ...Tooltip.Default,
   offset: [0, 8],
   trigger: 'click',
   content: '',
-  template: '<div class="popover" role="tooltip">' + '<div class="popover-arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div>' + '</div>'
+  template: '<div class=""></div>' + '</div>'
 };
 const DefaultType$2 = { ...Tooltip.DefaultType,
   content: '(string|element|function)'

@@ -1,13 +1,51 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Eagle Eats";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+    <div class="title-button-box">
+    @if (SignInManager.IsSignedIn(User))
+    {
+    
+        <a class="title-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+        <div class="title-item">
+            <span>Hello @User.Identity?.Name!</span>
+            </div></a>
+    
+        <a class="title-link" id="logout" onclick="document.getElementById('logoutForm').submit()">
+        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="title-item">
+            <span>Logout</span>
+        </form>
+        </a>
+    
+    }
+    else
+    {
+    
+        <a class="title-link" id="register" asp-area="Identity" asp-page="/Account/Register">
+        <div class="title-item">
+            <span>Register</span>
+            </div>
+            </a>
+    
+    
+        <a class="title-link" id="login" asp-area="Identity" asp-page="/Account/Login">
+        <div class="title-item">
+            <span>Login</span>
+            </div>
+            </a>
+    
+    }
+    </div>
+</div>
+<div class="header-image">g</div>
+<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
     <button onclick="locationTest()"></button>
-</div>
 
 
 
