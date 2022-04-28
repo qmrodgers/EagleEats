@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EagleEatsFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220427043744_init")]
+    [Migration("20220428052521_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("EagleEatsFinal.Data.Delivery", b =>
@@ -77,7 +77,6 @@ namespace EagleEatsFinal.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("EndLocation")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("EndTime")
@@ -85,6 +84,12 @@ namespace EagleEatsFinal.Migrations
 
                     b.Property<int>("Item_Id")
                         .HasColumnType("int");
+
+                    b.Property<float?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<float?>("Longitude")
+                        .HasColumnType("float");
 
                     b.Property<string>("ReceiverId")
                         .IsRequired()
@@ -104,7 +109,6 @@ namespace EagleEatsFinal.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("StartLocation")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Route_Id");
@@ -154,7 +158,6 @@ namespace EagleEatsFinal.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Method_Id");
@@ -171,11 +174,7 @@ namespace EagleEatsFinal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("Reviewed_User_Id")
-                        .HasColumnType("int");
 
                     b.Property<int>("Reviewer_Id")
                         .HasColumnType("int");
@@ -186,7 +185,12 @@ namespace EagleEatsFinal.Migrations
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Review_Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -460,13 +464,16 @@ namespace EagleEatsFinal.Migrations
 
             modelBuilder.Entity("EagleEatsFinal.Data.PayMethod", b =>
                 {
-                    b.HasOne("EagleEatsFinal.Data.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("EagleEatsFinal.Data.User", null)
+                        .WithMany("PayMethods")
+                        .HasForeignKey("UserId");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("EagleEatsFinal.Data.Review", b =>
+                {
+                    b.HasOne("EagleEatsFinal.Data.User", null)
+                        .WithMany("UserReviews")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -518,6 +525,13 @@ namespace EagleEatsFinal.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EagleEatsFinal.Data.User", b =>
+                {
+                    b.Navigation("PayMethods");
+
+                    b.Navigation("UserReviews");
                 });
 #pragma warning restore 612, 618
         }

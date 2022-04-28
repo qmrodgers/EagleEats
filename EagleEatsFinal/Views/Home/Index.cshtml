@@ -2,65 +2,41 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @{
-    ViewData["Title"] = "Eagle Eats";
+    ViewData["Title"] = "Home";
 }
 
 <div class="titlebox">
     <h1 class="">@ViewData["Title"]</h1>
-    <div class="title-button-box">
-    @if (SignInManager.IsSignedIn(User))
-    {
     
-        <a class="title-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-        <div class="title-item">
-            <span>Hello @User.Identity?.Name!</span>
-            </div></a>
-    
-        <a class="title-link" id="logout" onclick="document.getElementById('logoutForm').submit()">
-        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="title-item">
-            <span>Logout</span>
-        </form>
-        </a>
-    
-    }
-    else
-    {
-    
-        <a class="title-link" id="register" asp-area="Identity" asp-page="/Account/Register">
-        <div class="title-item">
-            <span>Register</span>
-            </div>
-            </a>
-    
-    
-        <a class="title-link" id="login" asp-area="Identity" asp-page="/Account/Login">
-        <div class="title-item">
-            <span>Login</span>
-            </div>
-            </a>
-    
-    }
-    </div>
 </div>
+
 <div class="header-image">
     <div class="vignette"></div>
     <div class="header-content-center">
         <h2 class="header-content-title">Welcome to Eagle Eats</h2>
         <p class="header-subtitle">Request or fulfill orders from your peers</p>
         <div class="header-buttons">
-        <a class="header-button" asp-controller="Order" asp-action="Order"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 219.2v212.5c0 14.25 11.62 26.25 26.5 27C75.32 461.2 180.2 471.3 240 511.9V245.2C181.4 205.5 79.99 194.8 29.84 192C13.59 191.1 0 203.6 0 219.2zM482.2 192c-50.09 2.848-151.3 13.47-209.1 53.09C272.1 245.2 272 245.3 272 245.5v266.5c60.04-40.39 164.7-50.76 213.5-53.28C500.4 457.9 512 445.9 512 431.7V219.2C512 203.6 498.4 191.1 482.2 192zM352 96c0-53-43-96-96-96S160 43 160 96s43 96 96 96S352 149 352 96z"/></svg>Make a Request!</span></a>
+        <a class="header-button" asp-controller="Order" asp-action="RequestItem"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 219.2v212.5c0 14.25 11.62 26.25 26.5 27C75.32 461.2 180.2 471.3 240 511.9V245.2C181.4 205.5 79.99 194.8 29.84 192C13.59 191.1 0 203.6 0 219.2zM482.2 192c-50.09 2.848-151.3 13.47-209.1 53.09C272.1 245.2 272 245.3 272 245.5v266.5c60.04-40.39 164.7-50.76 213.5-53.28C500.4 457.9 512 445.9 512 431.7V219.2C512 203.6 498.4 191.1 482.2 192zM352 96c0-53-43-96-96-96S160 43 160 96s43 96 96 96S352 149 352 96z"/></svg>Make a Request!</span></a>
         <a class="header-button" href="mailto:business.quaidrodgers@gmail.com"><span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 64C490.5 64 512 85.49 512 112C512 127.1 504.9 141.3 492.8 150.4L275.2 313.6C263.8 322.1 248.2 322.1 236.8 313.6L19.2 150.4C7.113 141.3 0 127.1 0 112C0 85.49 21.49 64 48 64H464zM217.6 339.2C240.4 356.3 271.6 356.3 294.4 339.2L512 176V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V176L217.6 339.2z"/></svg> Contact</span></a>
 
         </div>
     </div>
 </div>
-<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    <button onclick="locationTest()"></button>
+<div class="body-textbox">
+<p>This application is in development. Thank you for checking it out!</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim porro, reprehenderit a, iste eveniet labore consequuntur perspiciatis alias qui magni ipsam illo. Voluptatum perferendis voluptates totam dolore aspernatur dolorem nulla.</p>
+<p>Vero optio sit tempore. Impedit perferendis, nulla delectus voluptatibus perspiciatis laborum tempore dolore veritatis ipsa sit a consectetur corporis facere illo soluta eum. Quis repellendus, nobis assumenda dolore ratione totam!</p>
+<p>Eos reiciendis est non optio vero culpa ad doloremque officia deserunt? Nobis explicabo quia omnis molestias quidem laboriosam blanditiis esse amet, tenetur aspernatur similique nostrum impedit excepturi quo vero reprehenderit?</p>
+<p>Doloremque quod iusto nobis reiciendis molestiae. Eaque eveniet quis consectetur sequi harum distinctio quas nisi dolore corrupti, quidem ea suscipit est voluptatum tempore expedita doloribus minus aliquam molestias atque laudantium!</p>
+</div>
+    <!--<button onclick="locationTest()"></button>-->
 
 
 
 <script>
+
+
+
 const getLocation = () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {

@@ -11,8 +11,10 @@ namespace EagleEatsFinal.Data
 
         public User Receiver { get; set; }
         public Item Item { get; set; }
-        public string StartLocation { get; set; }
-        public string EndLocation { get; set; }
+        public string? StartLocation { get; set; }
+        public float? Latitude { get; set; }
+        public float? Longitude { get; set; }
+        public string? EndLocation { get; set; }
         public DateTime RequestTime { get; set; }
         public DateTime? BeginTime { get; set; }
         public DateTime? EndTime { get; set; }

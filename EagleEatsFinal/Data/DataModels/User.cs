@@ -10,6 +10,10 @@ namespace EagleEatsFinal.Data
         public string LastName { get; set; }
 
         public string Address { get; set; }
+
+        public ICollection<Review> UserReviews { get; set; }
+
+        public ICollection<PayMethod> PayMethods {get; set; }
        
     }
 }

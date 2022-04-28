@@ -1,0 +1,40 @@
+@model EagleEatsFinal.Data.Item
+
+@{
+    ViewData["Title"] = "Request Item";
+}
+
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+<section class="form-wrapper">
+    <div asp-validation-summary="All" class="form-item-validation-text"></div>
+    <form id="item-form" method="post" class="form">
+        <div class="form-item">
+            <label asp-for="Name" class="form-item-label"></label>
+                <input asp-for="Name" class="form-item-input"/>
+                <span asp-validation-for="Name" class="form-item-validation-text"></span>
+        </div>
+        <div class="form-item">
+            <label asp-for="Description" class="form-item-label"></label>
+                <input asp-for="Description" class="form-item-input"/>
+                <span asp-validation-for="Description" class="form-item-validation-text"></span>
+        </div>
+        <div class="form-item">
+            <label asp-for="Note" class="form-item-label"></label>
+                <input asp-for="Note" class="form-item-input"/>
+                <span asp-validation-for="Note" class="form-item-validation-text"></span>
+        </div>
+        <a class="form-submit" onclick="document.getElementById('item-form').submit()">Submit</a>
+    </form>
+</section>
+
+
+<script>
+
+
+    
+
+
+
+</script>

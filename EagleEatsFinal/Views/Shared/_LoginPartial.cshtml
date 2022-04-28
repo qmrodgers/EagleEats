@@ -8,12 +8,12 @@
     
         <a class="nav-link nav-bottom" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
         <div class="nav-item">
-            <span>Hello @User.Identity?.Name!</span>
+            <span class="nav-text">@User.Identity?.Name</span>
             </div></a>
     
-        <a class="nav-link" id="logout" onclick="document.getElementById('logoutForm').submit()">
+        <a class="nav-link nav-bottom" href="" id="logout" onclick="document.getElementById('logoutForm').submit()">
         <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="nav-item">
-            <span>Logout</span>
+            <span class="nav-text">Logout</span>
         </form>
         </a>
     

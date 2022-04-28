@@ -95,25 +95,6 @@ namespace EagleEatsFinal.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Reviews",
-                columns: table => new
-                {
-                    Review_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Reviewed_User_Id = table.Column<int>(type: "int", nullable: false),
-                    Reviewer_Id = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TimeStamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Score = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reviews", x => x.Review_Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -246,11 +227,11 @@ namespace EagleEatsFinal.Migrations
                 {
                     Method_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Information = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ProviderName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -260,8 +241,32 @@ namespace EagleEatsFinal.Migrations
                         name: "FK_PayMethods_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Review_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Reviewer_Id = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TimeStamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Score = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Review_Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -276,9 +281,11 @@ namespace EagleEatsFinal.Migrations
                     ReceiverId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Item_Id = table.Column<int>(type: "int", nullable: false),
-                    StartLocation = table.Column<string>(type: "longtext", nullable: false)
+                    StartLocation = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EndLocation = table.Column<string>(type: "longtext", nullable: false)
+                    Latitude = table.Column<float>(type: "float", nullable: true),
+                    Longitude = table.Column<float>(type: "float", nullable: true),
+                    EndLocation = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     RequestTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     BeginTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -411,6 +418,11 @@ namespace EagleEatsFinal.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_PayMethods_UserId",
                 table: "PayMethods",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_UserId",
+                table: "Reviews",
                 column: "UserId");
         }
 

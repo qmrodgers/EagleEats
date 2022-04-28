@@ -16318,6 +16318,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\quaid\\source\\repos\\EagleEats\\EagleEatsFinal\\Views\\Order\\RequestRoute.cshtml",
+      "TargetPath": "Views\\Order\\RequestRoute.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\quaid\\source\\repos\\EagleEats\\EagleEatsFinal\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -16350,6 +16355,11 @@
     {
       "FilePath": "c:\\Users\\quaid\\source\\repos\\EagleEats\\EagleEatsFinal\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\quaid\\source\\repos\\EagleEats\\EagleEatsFinal\\Views\\Order\\RequestItem.cshtml",
+      "TargetPath": "Views\\Order\\RequestItem.cshtml",
       "FileKind": "mvc"
     },
     {

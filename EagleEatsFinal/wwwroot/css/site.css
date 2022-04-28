@@ -26,26 +26,26 @@ html {
   padding-block: 1rem;
 
 }
-.nav-link > div {
+.nav-link > .nav-item {
   background-color: transparent;
   transition: background-color 100ms ease-in;
 }
 
-.nav-link > div:hover {
+.nav-link > .nav-item:hover {
   background-color: hsl(0, 0%, 10%);
 }
 
-.nav-link > div > span {
+.nav-link > .nav-item > span {
   filter: grayscale(80%) opacity(.7);
   transition: filter 100ms ease-in;
   display: inline-flex;
   align-items: center;
 }
-.nav-link > div:hover > span {
+.nav-link > .nav-item:hover > span {
   filter: grayscale(0%) opacity(1);
   }
 
-.nav-link > div > span > svg {
+.nav-link > .nav-item > span > svg {
     height: min(2rem, 3.25vh);
     width: min(2rem, 3.25vh);
     fill: var(--primary-color);
@@ -92,6 +92,18 @@ body::-webkit-scrollbar-thumb {
   background: var(--primary-color);
 }
 
+.main-content-wrapper::-webkit-scrollbar {
+  width: .75rem;
+}
+
+.main-content-wrapper::-webkit-scrollbar-track {
+  background: #241e1f;
+}
+
+.main-content-wrapper::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+
 
 a {
   color: var(--primary-color);
@@ -101,7 +113,7 @@ a {
 .nav-link {
   font-weight: 900;
   text-transform:uppercase;
-  font-size: min(2rem, 3.25vh);
+  font-size: min(24px, 3.25vh);
 
 }
 
@@ -130,14 +142,23 @@ display:flex;
 flex-direction: row;
 background-image: linear-gradient(#eeeeed 50%, var(--primary-white));
 background-repeat: no-repeat;
+
+
+}
+.header-shell {
+  width: 20rem;
+  height: 100%;
 }
 .nav-wrapper, .main-content-wrapper {
 height: 100vh;
 display: flex;
+position: fixed;
 }
 .nav-wrapper {
+
   width: 20rem;
   background-image: linear-gradient(var(--primary-black) 80%, var(--test-black));
+  z-index: 1;
 }
 .navigation-bar {
   width: 100%;
@@ -151,10 +172,18 @@ main a {
   color: var(--primary-color);
 }
 
+footer {
+  margin-top: auto;
+  margin-bottom: 1rem;
+}
+
 .main-content-wrapper {
   width: 100%;
   flex-direction: column;
   align-items: center;
+  padding-left: 20rem;
+  overflow-y:scroll;
+
 }
 
 .titlebox {
@@ -171,7 +200,7 @@ main a {
 
 .titlebox > h1 {
   text-align: center;
-  font-size: max(4rem, 5vh)
+  font-size: min(4rem, 5vh, 70px);
 }
 
 
@@ -216,8 +245,62 @@ text-align: center;
   font-size: 1.25rem;
   color: var(--primary-white);
   text-shadow: .15em .15em var(--primary-black);
+  text-align: center;
   margin: 0;
 }
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-inline: 4rem;
+  padding-block: 1rem;
+
+}
+
+.form-wrapper .form {
+  font-weight: 600;
+  font-size: min(24px, 3vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(hsl(0, 0%, 84%) 25%, hsl(0, 0%, 70%));
+  box-shadow: var(--primary-black) 0rem .25rem 2rem .1rem;
+  background-repeat: no-repeat;
+  padding-block: 1rem;
+  padding-inline: 10rem;
+  border-radius: 1rem 1rem;
+  width: 100%;
+  color: var(--primary-black);
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-inline: 10rem;
+  margin-bottom: 1rem;
+
+}
+.form > div > .form-item-input {
+  width: 100%;
+  aspect-ratio: 24 / 1;
+}
+.form a {
+  filter: opacity(.7) contrast(0%);
+  transition: filter ease-in 100ms;
+}
+
+.form a:hover {
+filter: opacity(1) contrast(100%);
+}
+
+.form-submit:hover {
+cursor: pointer;
+}
+
 .header-buttons {
   display: flex;
   margin-top: 1em;
@@ -257,13 +340,13 @@ text-align: center;
 align-items: center;
 width: 6vw;
 justify-content: center;
-font-size: max(1.5rem, 2vh);
+font-size: min(2rem, 3vh,24px);
 }
 .title-button-box {
   margin-left: auto;
   display: flex;
   height: 100%;
-  column-gap: max(3rem, 8vh);
+  column-gap: max(4rem, 5vh);
 }
 .title-item > span {
   text-transform: uppercase;
@@ -272,22 +355,49 @@ font-size: max(1.5rem, 2vh);
 .bottomnav {
   margin-top: auto;
 }
+
+.body-textbox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 8vh;
+
+
+}
+
 /* MEDIA QUERIES */
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   body {
     flex-direction: column-reverse;
-    padding-bottom: 20rem;
+
+  }
+  .form-wrapper .form {
+    background-image: none;
+    box-shadow: none;
+    padding: 0;
   }
 
+  .form div {
+    padding: 0;
+  }
+  
   .brand {
     display: none;
   }
 
   .nav-wrapper {
+    top:auto;
+    left:0;
+    bottom:0;
     height: min(100vw, 200px);
-    position: fixed;
     width: 100vw;
-    bottom: 0;
+
+  }
+  .main-content-wrapper {
+    padding-left: 0;
+    padding-bottom: 20rem;
   }
   .titlebox {
     align-items: center;
@@ -316,7 +426,7 @@ font-size: max(1.5rem, 2vh);
     height: fit-content;
   }
 
-  .nav-link > div > span > svg {
+  .nav-link > .nav-item > span > svg {
     height: min(10vw, 60px);
     width: min(10vw, 60px);
   }

@@ -1,0 +1,18 @@
+namespace EagleEatsFinal.Models{
+
+public class RouteRequest {
+
+    public Item RequestItem {get; set;}
+
+    
+
+    public RouteRequest() {
+        
+    }
+}
+
+
+
+
+
+}

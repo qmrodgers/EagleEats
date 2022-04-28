@@ -7,7 +7,6 @@ namespace EagleEatsFinal.Data
     {
         [Key]
         public int Method_Id { get; set; }
-        public User User { get; set; }
 
         public string Information { get; set; }
 
