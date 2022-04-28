@@ -80,6 +80,18 @@ h6 {
   font-size: 1.5rem;
 }
 
+body::-webkit-scrollbar {
+  width: .75rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #241e1f;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+}
+
 
 a {
   color: var(--primary-color);
@@ -147,7 +159,7 @@ main a {
 
 .titlebox {
   display:flex;
-  height: min(20vh, 200px);
+  height: min(15vh, 150px);
   background-image: linear-gradient(to right, var(--primary-black) 80%, var(--test-black));
   background-repeat: no-repeat;
   width: 100%;
@@ -161,15 +173,80 @@ main a {
   text-align: center;
   font-size: max(4rem, 5vh)
 }
+
+
+
 .header-image {
   display:grid;
-  grid-template-columns: repeat(12, calc(100%/12));
-  grid-template-rows: repeat(12, calc(100%/12));
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
   height: max(50vh, 25vw);
   width: 100%;
   background-image: url("/img/usihome.jpg");
   background-position: center;
   background-size: cover;
+
+}
+
+.vignette {
+  background-color: rgba(0, 0, 0, 0.507);
+  grid-column-start: 1;
+  grid-column-end: 13;
+  grid-row-start: 1;
+  grid-row-end: 13;
+}
+
+.header-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-column-start: 4;
+  grid-column-end: 10;
+  grid-row-start: 5;
+  grid-row-end: 9;
+
+}
+
+.header-content-title {
+color: var(--primary-white);
+text-shadow: .08em .08em var(--primary-black);
+text-align: center;
+} 
+.header-subtitle {
+  font-size: 1.25rem;
+  color: var(--primary-white);
+  text-shadow: .15em .15em var(--primary-black);
+  margin: 0;
+}
+.header-buttons {
+  display: flex;
+  margin-top: 1em;
+  column-gap: 1em;
+}
+.header-button {
+  color: var(--primary-white);
+  background-color: var(--primary-color);
+  border-radius: .25em .25em;
+  padding-inline: 1em;
+  padding-block: .75em;
+  transition: background-color 100ms ease-in;
+
+}
+
+.header-button span {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+
+}
+.header-button span svg {
+  height: 1em;
+  width: 1em;
+  fill: var(--primary-white);
+  margin-right: .5em;
+}
+.header-button:hover {
+  background-color: var(--secondary-color);
 
 }
 
@@ -180,7 +257,7 @@ main a {
 align-items: center;
 width: 6vw;
 justify-content: center;
-font-size: max(2rem, 2vh)
+font-size: max(1.5rem, 2vh);
 }
 .title-button-box {
   margin-left: auto;
@@ -192,11 +269,14 @@ font-size: max(2rem, 2vh)
   text-transform: uppercase;
   vertical-align: middle;
 }
-
+.bottomnav {
+  margin-top: auto;
+}
 /* MEDIA QUERIES */
 @media screen and (max-width: 768px) {
   body {
     flex-direction: column-reverse;
+    padding-bottom: 20rem;
   }
 
   .brand {
@@ -204,9 +284,9 @@ font-size: max(2rem, 2vh)
   }
 
   .nav-wrapper {
-    height: 20rem;
+    height: min(100vw, 200px);
     position: fixed;
-    width: 100%;
+    width: 100vw;
     bottom: 0;
   }
   .titlebox {
@@ -220,6 +300,44 @@ font-size: max(2rem, 2vh)
   .title-button-box {
     display: none;
   }
+  .nav-text {
+    display: none;
+  }
+  .navigation-bar {
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+
+    
+  }
+  .navigation-bar > .nav-link {
+    vertical-align: middle;
+    width:25vw;
+    height: fit-content;
+  }
+
+  .nav-link > div > span > svg {
+    height: min(10vw, 60px);
+    width: min(10vw, 60px);
+  }
+  .bottomnav {
+    justify-content: center;
+    width: 100vw;
+    height: fit-content;
+    flex-direction: row;
+    display:flex;
+    margin-top:0;
+  }
+  .bottomnav > .nav-link {
+    width: 35vw;
+    margin:0;
+  }
+
+  .bottomnav > .nav-link > div > span > svg {
+    width: min(14vw, 80px);
+    height: min(14vw, 80px);
+  }
+  
 
 
 }
