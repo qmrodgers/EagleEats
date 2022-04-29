@@ -9,11 +9,13 @@ namespace EagleEatsFinal.Data
         public int Route_Id { get; set; }
         public User Sender { get; set; }
 
-        public User Receiver { get; set; }
+        public User? Receiver { get; set; }
         public Item Item { get; set; }
         public string? StartLocation { get; set; }
-        public float? Latitude { get; set; }
-        public float? Longitude { get; set; }
+        public float? StartLatitude { get; set; }
+        public float? StartLongitude { get; set; }
+        public float? EndLatitude { get; set; }
+        public float? EndLongitude { get; set; }
         public string? EndLocation { get; set; }
         public DateTime RequestTime { get; set; }
         public DateTime? BeginTime { get; set; }

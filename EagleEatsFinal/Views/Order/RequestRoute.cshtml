@@ -1,9 +1,77 @@
+@model EagleEatsFinal.Models.RouteRequest
 
+@{
+    ViewData["Title"] = "Request a Route";
+}
+
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+<section class="item-section">
+
+</section>
+<section class="form-wrapper">
+    <div asp-validation-summary="All" class="form-item-validation-text"></div>
+    <form id="item-form" method="post" class="form">
+        <select id="startSelect" onchange="changeInput">
+            <option value="address" selected>Use An Address</option>
+            <option value="navigator">Use my Location</option>
+        </select>
+        <div class="form-item">
+            <div class="form-item-alternate">
+            <label class="form-item-label">Starting Address</label>
+                <input asp-for="Route.StartLocation" class="form-item-input"/>
+                <span asp-validation-for="Route.StartLocation" class="form-item-validation-text"></span>
+            </div>
+            <span>OR</span>
+            <div class="form-item-alternate">
+            <label class="form-item-label">Starting From My Location</label>
+                <input id="startlatitude" asp-for="Route.StartLatitude" class="form-item-input" disabled/>
+                <input id="startlongitude" asp-for="Route.StartLongitude" class="form-item-input" disabled/>
+          
+            </div>
+        </div>
+        <div class="form-item">
+            <div class="form-item-alternate">
+            <label asp-for="Route.EndLocation" class="form-item-label"></label>
+                <input asp-for="Route.EndLocation" class="form-item-input"/>
+                <span asp-validation-for="Route.EndLocation" class="form-item-validation-text"></span>
+             </div>
+             <span>OR</span>
+             <div class="form-item-alternate">
+            <label class="form-item-label">Use my location</label>
+                <input id="endlatitude" asp-for="Route.EndLatitude" class="form-item-input" disabled/>
+                <input id="endlongitude" asp-for="Route.EndLongitude" class="form-item-input" disabled/>
+          
+            </div>
+        </div>
+
+        <div class="form-item">
+            <label asp-for="Note" class="form-item-label"></label>
+                <input asp-for="Note" class="form-item-input"/>
+                <span asp-validation-for="Note" class="form-item-validation-text"></span>
+        </div>
+        <a class="form-submit" onclick="document.getElementById('item-form').submit()">Submit</a>
+    </form>
+</section>
 
 
 
 <script>
+    const changeInput = (event) => {
+
+        if (event.target.id == 'startSelect') {
+            let value = document.getElementById('startSelect').value;
+
+        }
+
+        let selector = document.getElementById(id).value;
+        console.log("got value " + selector + "from id " + id);
+        
+
+    }
+
     window.onbeforeunload = function() {
-    return true;
+    return "Leaving now will discard your requested item. Are you sure you would like to continue?;
 };
 </script>

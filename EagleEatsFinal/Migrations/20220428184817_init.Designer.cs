@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EagleEatsFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220428052521_init")]
+    [Migration("20220428184817_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

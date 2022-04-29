@@ -12,11 +12,11 @@ namespace EagleEatsFinal.Controllers
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
         private readonly ILogger<OrderController> _logger;
 
-        public OrderController(ILogger<OrderController> logger, ApplicationDbContext db, UserManager<IdentityUser> userManager)
+        public OrderController(ILogger<OrderController> logger, ApplicationDbContext db, UserManager<User> userManager)
         {
             _logger = logger;
             _db = db;
@@ -51,7 +51,6 @@ namespace EagleEatsFinal.Controllers
         {
             if (item is null) {ViewData["Error"] = "No item was requested for order"; return RedirectToAction("RequestItem");}
             ViewData["Item"] = item;
-            
             return View();
         }
 

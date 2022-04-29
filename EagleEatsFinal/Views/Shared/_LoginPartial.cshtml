@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using EagleEatsFinal.Data
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 <div class="bottomnav">
 @if (SignInManager.IsSignedIn(User))
@@ -11,8 +12,8 @@
             <span class="nav-text">@User.Identity?.Name</span>
             </div></a>
     
-        <a class="nav-link nav-bottom" href="" id="logout" onclick="document.getElementById('logoutForm').submit()">
-        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="nav-item">
+        <a id="logout" class="nav-link nav-bottom" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" onclick="document.getElementById('logoutForm').submit()">
+        <form id="logoutForm" class="nav-item">
             <span class="nav-text">Logout</span>
         </form>
         </a>
