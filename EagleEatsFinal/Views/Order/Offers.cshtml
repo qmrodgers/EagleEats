@@ -1,0 +1,76 @@
+﻿@using EagleEatsFinal.Data
+@model DeliveryRoute
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    if (Model != null)
+    {
+            ViewData["Title"] = $"Offers for your request: {@Model.Item.Name}";
+    }
+
+    if (ViewData["Error"] != null)
+    {
+        <script>alert(@ViewData["Error"]);</script>
+    }
+}
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+
+
+@if (ViewData["Success"] != null)
+{
+    <div class="alert success">
+        <p>
+            @ViewData["Success"]
+        </p>
+    </div>
+}
+
+
+
+<section class="table-wrapper">
+    <table>
+        <tr>
+            <th>Offer User</th>
+            <th>Price</th>
+            <th>Pitch</th>
+            <th>Accept/Reject</th>
+        </tr>
+
+        @foreach (var offer in Model.Offers)
+        {
+            <tr>
+                <td>
+                    <div class="table-cell">
+                        
+                        <span>@offer.User.FirstName @offer.User.LastName</span>
+                        
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>$@offer.price.ToString("N2")</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell scrollable">
+                        <span>@offer.pitch</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell with-button">
+                        <a asp-controller="Order" asp-action="AcceptOffer" asp-route-oId="@offer.Id" class="table-button"><span>Accept</span></a>
+                        <a asp-controller="Order" asp-action="RejectOffer" asp-route-oId="@offer.Id" class="table-button"><span>Reject</span></a>
+                    </div>
+                </td>
+                
+
+            </tr>
+        }
+    </table>
+</section>
+

@@ -1,0 +1,81 @@
+﻿@using EagleEatsFinal.Data
+@model IEnumerable<Delivery>
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "My Deliveries";
+    if (ViewData["Error"] != null)
+    {
+        <script>alert(@ViewData["Error"]);</script>
+    }
+}
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+
+
+@if (ViewData["Success"] != null)
+{
+    <div class="alert success">
+        <p>
+            @ViewData["Success"]
+        </p>
+    </div>
+}
+
+
+
+<section class="table-wrapper">
+    <table>
+        <tr>
+            <th>Route Item</th>
+            <th>Delivery Status</th>
+            <th>Deliver By</th>
+            <th>Total Cost for Receiver</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+        </tr>
+
+        @foreach (var delivery in Model)
+        {
+            <tr>
+                <td>
+                    <div class="table-cell with-button">
+                        
+                        <span>@delivery.Route.Item.Name</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>@delivery.DeliveryStatus</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell scrollable">
+                        <span>@delivery.ETA</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell scrollable note">
+                        <span>$@delivery.TotalCost.ToString("N2")</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell scrollable">
+                        <span>@delivery.Route.StartLocation</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>@delivery.Route.EndLocation</span>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </table>
+</section>
+

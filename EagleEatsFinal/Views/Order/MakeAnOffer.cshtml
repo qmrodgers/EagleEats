@@ -1,0 +1,48 @@
+@using EagleEatsFinal.Data
+@model EagleEatsFinal.Data.Offer
+
+@{
+    ViewData["Title"] = "Request Item";
+    DeliveryRoute route = ViewData["Route"] as DeliveryRoute;
+}
+
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+
+<div class="routeBox">
+    <p class="routeBoxItem"><b>Route Item:</b> @route.Item.Name</p>
+    <p class="routeBoxItem"><b>Item Description:</b> @route.Item.Description</p>
+    <p class="routeBoxItem"><b>Item Note:</b> @route.Item.Note</p>
+    <p class="routeBoxItem"><b>Approx. Pickup Time:</b> @route.RequestedPickupTime</p>
+    <p class="routeBoxItem"><b>Approx. Route Item:</b> @route.RequestedDeliveryTime</p>
+    <p class="routeBoxItem"><b>Pickup Location:</b> @route.StartLocation</p>
+    <p class="routeBoxItem"><b>Delivery Location:</b> @route.EndLocation</p>
+</div>
+<section class="form-wrapper">
+    <div asp-validation-summary="All" class="form-item-validation-text"></div>
+    <form id="item-form" asp-route-Rid="@route.Route_Id" method="post" class="form">
+        <h5>Detail your item</h5>
+        <div class="form-item">
+            <label asp-for="price" class="form-item-label"></label>
+                $<input asp-for="price" class="form-item-input"/>
+                <span asp-validation-for="price" class="form-item-validation-text"></span>
+        </div>
+        <div class="form-item">
+            <label asp-for="pitch" class="form-item-label">Make a Pitch (Optional)</label>
+                <input asp-for="pitch" class="form-item-input"/>
+                <span asp-validation-for="pitch" class="form-item-validation-text"></span>
+        </div>
+        <a class="form-submit" onclick="document.getElementById('item-form').submit()">Submit</a>
+    </form>
+</section>
+
+
+<script>
+
+
+    
+
+
+
+</script>

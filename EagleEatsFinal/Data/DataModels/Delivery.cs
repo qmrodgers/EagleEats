@@ -5,11 +5,7 @@ namespace EagleEatsFinal.Data
 {
     public enum DeliveryStatus
     {
-        Delivered, Late, Missed
-    }
-    public enum RequestStatus
-    {
-        Pending, Accepted, Rejected
+        Delivered, Late, Missed, Pending
     }
     public class Delivery
     {
@@ -18,14 +14,21 @@ namespace EagleEatsFinal.Data
         public User Driver { get; set; }
         public DeliveryRoute Route { get; set; }
         public DeliveryStatus DeliveryStatus { get; set; }
-        public RequestStatus RequestStatus { get; set; }
         public DateTime OrderTime { get; set; }
         public DateTime? DeliveryTime { get; set; }
         public DateTime ETA { get; set; }
         public decimal TotalCost { get; set; }
-        public decimal Tip { get; set; }
+        public decimal? Tip { get; set; }
         public decimal Tax { get; set; }
 
+        public Delivery()
+        {
 
+        }
+        public Delivery(decimal itemprice)
+        {
+            Tax = 0.07m;
+            TotalCost = itemprice + (itemprice * Tax) + 10;
+        }
     }
 }

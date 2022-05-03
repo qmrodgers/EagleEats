@@ -51,12 +51,44 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/AcceptOffer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQWNjZXB0T2ZmZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/DeleteRoute.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGVsZXRlUm91dGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/Deliveries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcRGVsaXZlcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/MakeAnOffer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcTWFrZUFuT2ZmZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/Offers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT2ZmZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/RejectOffer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcUmVqZWN0T2ZmZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/RequestItem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcUmVxdWVzdEl0ZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/RequestRoute.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcUmVxdWVzdFJvdXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/Requests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcUmVxdWVzdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Order/SearchRequests.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcU2VhcmNoUmVxdWVzdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/quaid/source/repos/EagleEats/EagleEatsFinal/Views/Shared/Error.cshtml]

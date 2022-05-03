@@ -278,20 +278,17 @@ namespace EagleEatsFinal.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     SenderId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ReceiverId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ReceiverId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Item_Id = table.Column<int>(type: "int", nullable: false),
-                    StartLocation = table.Column<string>(type: "longtext", nullable: true)
+                    StartLocation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Latitude = table.Column<float>(type: "float", nullable: true),
-                    Longitude = table.Column<float>(type: "float", nullable: true),
-                    EndLocation = table.Column<string>(type: "longtext", nullable: true)
+                    EndLocation = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     RequestTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    BeginTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EndTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    RouteCost = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    RouteDistance = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                    RequestedPickupTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    RequestedDeliveryTime = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -300,8 +297,7 @@ namespace EagleEatsFinal.Migrations
                         name: "FK_DeliveryRoutes_AspNetUsers_ReceiverId",
                         column: x => x.ReceiverId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DeliveryRoutes_AspNetUsers_SenderId",
                         column: x => x.SenderId,
@@ -318,6 +314,28 @@ namespace EagleEatsFinal.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Contracts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ContractedRouteRoute_Id = table.Column<int>(type: "int", nullable: false),
+                    DelivererConfirmedDelivery = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ReceiverConfirmedDelivery = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contracts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Contracts_DeliveryRoutes_ContractedRouteRoute_Id",
+                        column: x => x.ContractedRouteRoute_Id,
+                        principalTable: "DeliveryRoutes",
+                        principalColumn: "Route_Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Deliveries",
                 columns: table => new
                 {
@@ -327,12 +345,11 @@ namespace EagleEatsFinal.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Route_Id = table.Column<int>(type: "int", nullable: false),
                     DeliveryStatus = table.Column<int>(type: "int", nullable: false),
-                    RequestStatus = table.Column<int>(type: "int", nullable: false),
                     OrderTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DeliveryTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     ETA = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     TotalCost = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    Tip = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Tip = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     Tax = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
@@ -350,6 +367,37 @@ namespace EagleEatsFinal.Migrations
                         principalTable: "DeliveryRoutes",
                         principalColumn: "Route_Id",
                         onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Offers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    pitch = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    offerStatus = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DeliveryRouteRoute_Id = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Offers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Offers_DeliveryRoutes_DeliveryRouteRoute_Id",
+                        column: x => x.DeliveryRouteRoute_Id,
+                        principalTable: "DeliveryRoutes",
+                        principalColumn: "Route_Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -391,6 +439,11 @@ namespace EagleEatsFinal.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Contracts_ContractedRouteRoute_Id",
+                table: "Contracts",
+                column: "ContractedRouteRoute_Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Deliveries_DriverId",
                 table: "Deliveries",
                 column: "DriverId");
@@ -414,6 +467,16 @@ namespace EagleEatsFinal.Migrations
                 name: "IX_DeliveryRoutes_SenderId",
                 table: "DeliveryRoutes",
                 column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Offers_DeliveryRouteRoute_Id",
+                table: "Offers",
+                column: "DeliveryRouteRoute_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Offers_UserId",
+                table: "Offers",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PayMethods_UserId",
@@ -444,7 +507,13 @@ namespace EagleEatsFinal.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Contracts");
+
+            migrationBuilder.DropTable(
                 name: "Deliveries");
+
+            migrationBuilder.DropTable(
+                name: "Offers");
 
             migrationBuilder.DropTable(
                 name: "PayMethods");

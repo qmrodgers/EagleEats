@@ -19,6 +19,28 @@ namespace EagleEatsFinal.Migrations
                 .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("EagleEatsFinal.Data.Contract", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContractedRouteRoute_Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("DelivererConfirmedDelivery")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("ReceiverConfirmedDelivery")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractedRouteRoute_Id");
+
+                    b.ToTable("Contracts");
+                });
+
             modelBuilder.Entity("EagleEatsFinal.Data.Delivery", b =>
                 {
                     b.Property<int>("Delivery_Id")
@@ -41,16 +63,13 @@ namespace EagleEatsFinal.Migrations
                     b.Property<DateTime>("OrderTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("RequestStatus")
-                        .HasColumnType("int");
-
                     b.Property<int>("Route_Id")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Tax")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("Tip")
+                    b.Property<decimal?>("Tip")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("TotalCost")
@@ -71,43 +90,35 @@ namespace EagleEatsFinal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("BeginTime")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("EndLocation")
+                        .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("Item_Id")
                         .HasColumnType("int");
 
-                    b.Property<float?>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<float?>("Longitude")
-                        .HasColumnType("float");
-
                     b.Property<string>("ReceiverId")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("RequestTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("RouteCost")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<DateTime>("RequestedDeliveryTime")
+                        .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("RouteDistance")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<DateTime>("RequestedPickupTime")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("SenderId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("StartLocation")
+                        .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Route_Id");
 
@@ -139,6 +150,37 @@ namespace EagleEatsFinal.Migrations
                     b.HasKey("Item_Id");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("EagleEatsFinal.Data.Offer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DeliveryRouteRoute_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("offerStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("pitch")
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryRouteRoute_Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Offers");
                 });
 
             modelBuilder.Entity("EagleEatsFinal.Data.PayMethod", b =>
@@ -408,10 +450,20 @@ namespace EagleEatsFinal.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasDiscriminator().HasValue("User");
+                });
+
+            modelBuilder.Entity("EagleEatsFinal.Data.Contract", b =>
+                {
+                    b.HasOne("EagleEatsFinal.Data.DeliveryRoute", "ContractedRoute")
+                        .WithMany()
+                        .HasForeignKey("ContractedRouteRoute_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ContractedRoute");
                 });
 
             modelBuilder.Entity("EagleEatsFinal.Data.Delivery", b =>
@@ -443,9 +495,7 @@ namespace EagleEatsFinal.Migrations
 
                     b.HasOne("EagleEatsFinal.Data.User", "Receiver")
                         .WithMany()
-                        .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ReceiverId");
 
                     b.HasOne("EagleEatsFinal.Data.User", "Sender")
                         .WithMany()
@@ -458,6 +508,21 @@ namespace EagleEatsFinal.Migrations
                     b.Navigation("Receiver");
 
                     b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("EagleEatsFinal.Data.Offer", b =>
+                {
+                    b.HasOne("EagleEatsFinal.Data.DeliveryRoute", null)
+                        .WithMany("Offers")
+                        .HasForeignKey("DeliveryRouteRoute_Id");
+
+                    b.HasOne("EagleEatsFinal.Data.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EagleEatsFinal.Data.PayMethod", b =>
@@ -523,6 +588,11 @@ namespace EagleEatsFinal.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EagleEatsFinal.Data.DeliveryRoute", b =>
+                {
+                    b.Navigation("Offers");
                 });
 
             modelBuilder.Entity("EagleEatsFinal.Data.User", b =>

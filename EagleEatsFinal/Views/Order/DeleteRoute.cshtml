@@ -1,0 +1,13 @@
+﻿@*
+
+*@
+@model string
+@{
+    ViewData["Title"] = "Delete Route";
+}
+
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+<h3>Are you sure you would like to delete this route?</h3>
+<a asp-controller="Order" asp-action="DeleteRoute" asp-route-rId="@ViewData["Route"]" asp-route-delete="true" class="header-button">Delete Route</a>

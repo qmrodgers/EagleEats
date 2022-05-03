@@ -14,6 +14,10 @@ namespace EagleEatsFinal.Data
         public DbSet<DeliveryRoute> DeliveryRoutes { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<PayMethod> PayMethods { get; set; }
+        public DbSet<Offer> Offers { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+
+
     }
 }

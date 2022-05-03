@@ -1,0 +1,110 @@
+﻿@using EagleEatsFinal.Data
+@model IEnumerable<EagleEatsFinal.Data.DeliveryRoute>
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "My Requests";
+    if (ViewData["Error"] != null)
+    {
+        <script>alert(@ViewData["Error"]);</script>
+    }
+}
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+
+
+@if (ViewData["Success"] != null)
+{
+    <div class="alert success">
+        <p>
+            @ViewData["Success"]
+        </p>
+    </div>
+}
+
+
+
+<section class="table-wrapper">
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Note</th>
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Requested On</th>
+            <th>Pickup Time</th>
+            <th>Delivery Time</th>
+            <th>Offers</th>
+        </tr>
+
+        @foreach (var route in Model)
+        {
+            <tr>
+                <td>
+                    <div class="table-cell with-button">
+                        
+                        <span>@route.Status.ToString()</span>
+                        <a asp-controller="Order" asp-action="DeleteRoute" asp-route-rId="@route.Route_Id" class="table-button"><span>Delete</span></a>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>@route.Item.Name</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell scrollable">
+                        <span>@route.Item.Description</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell scrollable note">
+                        <span>@route.Item.Note</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell scrollable">
+                        <span>@route.StartLocation</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>@route.EndLocation</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>@route.RequestTime</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>@route.RequestedPickupTime</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell">
+                        <span>@route.RequestedDeliveryTime</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="table-cell with-button">
+                        <span>@((route.Offers == null) ? "0" : route.Offers.Count)</span>
+                        @if (route.Status == RequestStatus.Pending)
+                        {
+                            <a asp-controller="Order" asp-action="Offers" asp-route-rId="@route.Route_Id" class="table-button"><span>View</span></a>
+                        }
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </table>
+</section>
+

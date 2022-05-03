@@ -3,24 +3,31 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EagleEatsFinal.Data
 {
+    public enum RequestStatus
+    {
+        Pending,
+        Accepted,
+        InProgress,
+        Delivered
+    }
     public class DeliveryRoute
     {
         [Key]
         public int Route_Id { get; set; }
         public User Sender { get; set; }
-
+        public RequestStatus Status { get; set; }
         public User? Receiver { get; set; }
         public Item Item { get; set; }
-        public string? StartLocation { get; set; }
-        public float? StartLatitude { get; set; }
-        public float? StartLongitude { get; set; }
-        public float? EndLatitude { get; set; }
-        public float? EndLongitude { get; set; }
-        public string? EndLocation { get; set; }
+        public string StartLocation { get; set; }
+        public string EndLocation { get; set; }
         public DateTime RequestTime { get; set; }
-        public DateTime? BeginTime { get; set; }
-        public DateTime? EndTime { get; set; }
-        public decimal RouteCost { get; set; }
-        public decimal RouteDistance { get; set; }
+        public DateTime RequestedPickupTime { get; set; }
+        public DateTime RequestedDeliveryTime { get; set; }
+        public ICollection<Offer>? Offers { get; set; }
+
+        public DeliveryRoute()
+        {
+            Status = RequestStatus.Pending;
+        }
     }
 }

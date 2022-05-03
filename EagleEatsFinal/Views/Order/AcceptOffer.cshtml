@@ -1,0 +1,34 @@
+@using EagleEatsFinal.Data
+@model EagleEatsFinal.Data.Offer
+
+@{
+    ViewData["Title"] = "Accept Offer";
+    Offer offer = ViewData["Offer"] as Offer;
+}
+
+<div class="titlebox">
+    <h1 class="">@ViewData["Title"]</h1>
+</div>
+
+
+<section class="form-wrapper">
+    <div asp-validation-summary="All" class="form-item-validation-text"></div>
+    <form id="item-form" asp-route-Oid="@offer.Id" method="post" class="form">
+        <h5>Accept Offer?</h5>
+
+        <div class="form-item">
+            <p>Would you like to accept this offer?</p>
+        </div>
+        <a class="form-submit" onclick="document.getElementById('item-form').submit()">Accept</a>
+    </form>
+</section>
+
+
+<script>
+
+
+    
+
+
+
+</script>
